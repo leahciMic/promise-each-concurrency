@@ -1,0 +1,20 @@
+{
+  "name": "promise-each-concurrency",
+  "version": "0.0.1",
+  "description": "Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "prepublish": "rm -rf ./dist && babel -d ./dist ./src"
+  },
+  "keywords": ["promise", "iteration", "each", "concurrency", "limit", "iterator"],
+  "repository": "leahcimic/promise-each-concurrency",
+  "author": "Michael Leaney <leahcimic@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
+    "babel-preset-stage-3": "^6.5.0",
+    "mocha": "^2.5.3"
+  }
+}
