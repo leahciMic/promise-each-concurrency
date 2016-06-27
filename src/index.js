@@ -1,9 +1,12 @@
-export default async function promiseEach(iterable, fn, {concurrency = Math.infinity, progress = () => {}}) {
+export default async function promiseEach(iterable, fn, {
+  concurrency = Math.infinity,
+  progress = () => {},
+}) {
   const nextItem = (function* next() {
-    for (let x of iterable) {
+    for (const x of iterable) {
       yield x;
     }
-  })();
+  }());
 
   function processNItems(n) {
     const promises = [];
@@ -17,7 +20,7 @@ export default async function promiseEach(iterable, fn, {concurrency = Math.infi
     return Promise.all(promises);
   }
 
-  while (true) {
+  while (true) { // eslint-disable-line no-constant-condition
     const items = await processNItems(concurrency);
     if (items.length) { progress(items); }
     if (items.length < concurrency) { break; }
