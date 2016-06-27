@@ -1,6 +1,8 @@
 # promise-each-concurrency
 [![Build Status](https://travis-ci.org/leahciMic/promise-each-concurrency.svg?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
 [![Code Climate](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/gpa.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency)
+[![Test Coverage](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/coverage.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency/coverage)
+[![Issue Count](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/issue_count.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency)
 [![Dependency Status](https://www.versioneye.com/user/projects/5770e219671894003644917f/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5770e219671894003644917f)
 
 Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.
