@@ -6,12 +6,9 @@ describe('promise-each-concurrency', () => {
   it('should process all items', (done) => {
     const iterator = sinon.spy(() => new Promise(resolve => resolve()));
 
-    const progress = sinon.spy((completedItems) => {
-      expect(completedItems.length).to.equal(3);
+    promiseEach([1, 2, 3], iterator).then(() => {
       expect(iterator.callCount).to.equal(3);
-    });
-
-    promiseEach([1, 2, 3], iterator, { progress }).then(done, done);
+    }, done);
   });
 
   it('should obey concurrency limit', (done) => {
