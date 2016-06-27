@@ -1,0 +1,10 @@
+src/
+coverage/
+.nyc_output/
+.babelrc
+.codeclimate.yml
+.eslintrc
+.gitignore
+.npmignore
+*.swp
+.travis.yml
