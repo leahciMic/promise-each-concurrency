@@ -1,11 +1,13 @@
 # promise-each-concurrency
+[![Build Status](https://travis-ci.org/leahciMic/promise-each-concurrency.svg?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
+[![Code Climate](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/gpa.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency)
+[![Dependency Status](https://www.versioneye.com/user/projects/5770e219671894003644917f/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5770e219671894003644917f)
 
 Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.
 
 ## Usage
 
 ```js
-
 const promiseEach = require('promise-each-concurrency');
 
 promiseEach(
@@ -32,7 +34,7 @@ With a 1 second pause between each line.
 
 ## API
 
-```
+```js
 promiseEach(
   Iterable<any> input,
   function(any item) iterator,
@@ -49,6 +51,4 @@ promiseEach(
 
 ## Todo
 
-* Finish tests.
-* Travis
-* Readme badges
+* More tests
