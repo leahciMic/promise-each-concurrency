@@ -38,9 +38,7 @@
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
     "nyc": "^6.6.1",
-    "sinon": "^1.17.4"
-  },
-  "dependencies": {
+    "sinon": "^1.17.4",
     "eslint-plugin-import": "^1.9.2"
   },
   "nyc": {

@@ -1,5 +1,5 @@
 export default async function promiseEach(iterable, fn, {
-  concurrency = Math.infinity,
+  concurrency = Infinity,
   progress = () => {},
 }) {
   const nextItem = (function* next() {
@@ -10,7 +10,6 @@ export default async function promiseEach(iterable, fn, {
 
   function processNItems(n) {
     const promises = [];
-
     for (let i = 0; i < n; i++) {
       const next = nextItem.next();
       if (next.done) { break; }
