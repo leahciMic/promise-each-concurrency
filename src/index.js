@@ -1,7 +1,7 @@
 export default async function promiseEach(iterable, fn, {
   concurrency = Infinity,
   progress = () => {},
-}) {
+} = {}) {
   const nextItem = (function* next() {
     for (const x of iterable) {
       yield x;

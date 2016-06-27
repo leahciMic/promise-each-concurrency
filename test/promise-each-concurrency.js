@@ -8,6 +8,7 @@ describe('promise-each-concurrency', () => {
 
     promiseEach([1, 2, 3], iterator).then(() => {
       expect(iterator.callCount).to.equal(3);
+      done();
     }, done);
   });
 
