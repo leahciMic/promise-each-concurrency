@@ -1,4 +1,4 @@
-export default async function promiseEach(iterable, fn, {
+export async function promiseEach(iterable, fn, {
   concurrency = Infinity,
   progress = () => {},
 } = {}) {
@@ -24,4 +24,10 @@ export default async function promiseEach(iterable, fn, {
     if (items.length) { progress(items); }
     if (items.length < concurrency) { break; }
   }
+}
+
+export default promiseEach;
+
+if (module) {
+  module.exports = promiseEach;
 }

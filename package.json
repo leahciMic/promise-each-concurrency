@@ -1,6 +1,6 @@
 {
   "name": "promise-each-concurrency",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.",
   "main": "dist/index.js",
   "scripts": {
