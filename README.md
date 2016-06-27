@@ -49,8 +49,3 @@ promiseEach(
 | Name        | Default       | Description                                            |
 |-------------|---------------|--------------------------------------------------------|
 | concurrency | Math.infinity | how many items to process at once, default is no limit |
-
-
-## Todo
-
-* More tests
