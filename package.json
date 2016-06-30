@@ -35,11 +35,11 @@
     "codeclimate-test-reporter": "^0.3.3",
     "eslint": "^2.13.1",
     "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.9.2",
     "lodash": "^4.13.1",
     "mocha": "^2.5.3",
     "nyc": "^6.6.1",
-    "sinon": "^1.17.4",
-    "eslint-plugin-import": "^1.9.2"
+    "sinon": "^1.17.4"
   },
   "nyc": {
     "include": [
@@ -50,5 +50,8 @@
     ],
     "sourceMap": false,
     "instrument": false
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
   }
 }
