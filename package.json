@@ -1,6 +1,6 @@
 {
   "name": "promise-each-concurrency",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.",
   "main": "dist/index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "babel-register": "^6.9.0",
     "babel-runtime": "^6.9.2",
     "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "codeclimate-test-reporter": "^0.3.3",
     "eslint": "^2.13.1",
     "eslint-config-airbnb-base": "^3.0.1",

@@ -2,47 +2,57 @@ import debug from 'debug';
 
 const log = debug('promise-each-concurrency');
 
-export async function promiseEach(iterable, fn, {
+export function promiseEach(iterable, iterator, {
   concurrency = Infinity,
-  progress = () => {},
 } = {}) {
-  const nextItem = (function* next() {
-    for (const x of iterable) {
-      log('retrieve next value in iterable');
-      yield x;
-    }
-  }());
+  return new Promise((resolve, reject) => {
+    let inFlightItems = 0;
+    let aborted = false;
 
-  function processNItems(n) {
-    const promises = [];
-    log(`process ${n} items`);
-    for (let i = 0; i < n; i++) {
-      const next = nextItem.next();
-      log('got next item', next.done);
-      if (next.done) { break; }
-      const retVal = fn(next.value);
-      log('got the return value');
-      if (!retVal.then) {
-        log('does not look like you returned a promise!');
+    function onSuccess() {
+      log('iterator completed with success');
+      inFlightItems--;
+      doMore(); // eslint-disable-line no-use-before-define
+    }
+
+    function onError(err) {
+      log('iterator had error', err);
+      aborted = true;
+      reject(err);
+    }
+
+    const nextItem = (function* next() {
+      for (const x of iterable) {
+        log('retrieve next value in iterable');
+        yield x;
       }
-      promises.push(retVal);
+    }());
+
+    function doMore() {
+      if (aborted) {
+        log('we were aborted, refusing to do more work');
+        return;
+      }
+      while (inFlightItems < concurrency) {
+        log('next item in queue');
+        const next = nextItem.next();
+        if (next.done) {
+          log('queue is finished');
+          if (inFlightItems === 0) {
+            log('everyone is done');
+            resolve();
+            return;
+          }
+          break;
+        }
+        inFlightItems++;
+        log('run iterator');
+        iterator(next.value).then(onSuccess, onError);
+      }
     }
 
-    return Promise.all(promises);
-  }
-
-  while (true) { // eslint-disable-line no-constant-condition
-    log('processing some items');
-    const items = await processNItems(concurrency);
-    log(`update progress ${items.length}`);
-    if (items.length) { progress(items); }
-    log('finishing up');
-    if (items.length < concurrency) { break; }
-  }
+    doMore();
+  });
 }
 
 export default promiseEach;
-
-if (module) {
-  module.exports = promiseEach;
-}

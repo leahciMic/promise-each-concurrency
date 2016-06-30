@@ -1,25 +1,52 @@
 import promiseEach from '../src/index.js';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
+import chaiAsPromised from 'chai-as-promised';
+
+chai.use(chaiAsPromised);
 
 describe('promise-each-concurrency', () => {
-  it('should process all items', (done) => {
+  it('should process all items', () => {
     const iterator = sinon.spy(() => new Promise(resolve => resolve()));
 
-    promiseEach([1, 2, 3], iterator).then(() => {
+    return promiseEach([1, 2, 3], iterator).then(() => {
       expect(iterator.callCount).to.equal(3);
-      done();
-    }, done);
+    });
   });
 
-  it('should obey concurrency limit', (done) => {
-    const iterator = sinon.spy(() => new Promise(resolve => resolve()));
+  it('should obey concurrency limit', () => {
+    let started = 0;
 
-    const progress = sinon.spy((completedItems) => {
-      expect(completedItems.length).to.equal(1);
-      expect(progress.callCount).to.equal(iterator.callCount);
+    const iterator = sinon.spy(() => {
+      started++;
+      expect(started).to.be.at.most(2);
+
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          started--;
+          resolve();
+        });
+      });
     });
 
-    promiseEach([1, 2, 3], iterator, { concurrency: 1, progress }).then(done, done);
+    return promiseEach([1, 2, 3, 4, 6], iterator, { concurrency: 2 });
+  });
+
+  it('should handle errors gracefully', () => {
+    const waitForFirstIterator = new Promise(resolve => setTimeout(resolve));
+
+    const spy = sinon.spy(() => {
+      if (spy.callCount === 1) {
+        return waitForFirstIterator;
+      }
+      return Promise.reject('foobar');
+    });
+
+    const promise = promiseEach([1, 2], spy, { concurrency: 2 });
+
+    return Promise.all([
+      waitForFirstIterator,
+      expect(promise).to.be.rejectedWith('foobar'),
+    ]);
   });
 });
