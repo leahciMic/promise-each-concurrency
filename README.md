@@ -11,6 +11,7 @@ Pretty much Bluebird's Promise.each with a concurrency option, and support itera
 
 ```js
 const promiseEach = require('promise-each-concurrency');
+// or import promiseEach from 'promise-each-concurrency';
 
 promiseEach(
   [1, 2, 3],
@@ -49,3 +50,9 @@ promiseEach(
 | Name        | Default       | Description                                            |
 |-------------|---------------|--------------------------------------------------------|
 | concurrency | Math.infinity | how many items to process at once, default is no limit |
+
+
+## Changelog
+
+* 1.1.0
+  - Export correctly for ES5 CommonJS exports

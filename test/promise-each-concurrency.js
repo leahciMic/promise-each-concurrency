@@ -3,9 +3,15 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import chaiAsPromised from 'chai-as-promised';
 
+const cjsPromiseEach = require('../src/index.js');
+
 chai.use(chaiAsPromised);
 
 describe('promise-each-concurrency', () => {
+  it('should export correctly under es5 cjs', () => {
+    expect(cjsPromiseEach).to.be.a('function');
+  });
+
   it('should process all items', () => {
     const iterator = sinon.spy(() => new Promise(resolve => resolve()));
 

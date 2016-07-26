@@ -2,7 +2,7 @@ import debug from 'debug';
 
 const log = debug('promise-each-concurrency');
 
-export function promiseEach(iterable, iterator, {
+function promiseEach(iterable, iterator, {
   concurrency = Infinity,
 } = {}) {
   return new Promise((resolve, reject) => {
