@@ -5,6 +5,7 @@ const log = debug('promise-each-concurrency');
 function promiseEach(iterable, iterator, {
   concurrency = Infinity,
 } = {}) {
+  let itemsDone = 0;
   return new Promise((resolve, reject) => {
     let inFlightItems = 0;
     let aborted = false;
@@ -46,8 +47,9 @@ function promiseEach(iterable, iterator, {
           break;
         }
         inFlightItems++;
+        itemsDone++;
         log('run iterator');
-        iterator(next.value).then(onSuccess, onError);
+        iterator(next.value, itemsDone % concurrency).then(onSuccess, onError);
       }
     }
 

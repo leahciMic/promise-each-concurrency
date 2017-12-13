@@ -2,6 +2,7 @@ import promiseEach from '../src/index.js';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import chaiAsPromised from 'chai-as-promised';
+import repeatArray from 'repeat-array';
 
 const cjsPromiseEach = require('../src/index.js');
 
@@ -54,5 +55,36 @@ describe('promise-each-concurrency', () => {
       waitForFirstIterator,
       expect(promise).to.be.rejectedWith('foobar'),
     ]);
+  });
+
+  it('should give a fake threadId', () => {
+    let started = 0;
+
+    const iterator = sinon.spy((value, threadId) => {
+      expect(value).to.equal(threadId);
+      return Promise.resolve();
+    });
+
+    return promiseEach(repeatArray([1, 0], 100), iterator, { concurrency: 2 });
+  });
+  it('should give a fake threadId', () => {
+    let started = 0;
+
+    const iterator = sinon.spy((value, threadId) => {
+      expect(value).to.equal(threadId);
+      return Promise.resolve();
+    });
+
+    return promiseEach(repeatArray([1,2, 0], 100), iterator, { concurrency: 3 });
+  });
+  it('should give a fake threadId', () => {
+    let started = 0;
+
+    const iterator = sinon.spy((value, threadId) => {
+      expect(value).to.equal(threadId);
+      return Promise.resolve();
+    });
+
+    return promiseEach(repeatArray([1,2, 3, 4, 5, 0], 100), iterator, { concurrency: 6 });
   });
 });
