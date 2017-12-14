@@ -5,7 +5,10 @@ const log = debug('promise-each-concurrency');
 function promiseEach(iterable, iterator, {
   concurrency = Infinity,
 } = {}) {
+  const availableThreads = [];
+  let maxThreadId = 0;
   let itemsDone = 0;
+
   return new Promise((resolve, reject) => {
     let inFlightItems = 0;
     let aborted = false;
@@ -48,8 +51,20 @@ function promiseEach(iterable, iterator, {
         }
         inFlightItems++;
         itemsDone++;
+
+        if (!availableThreads.length) {
+          availableThreads.push(maxThreadId);
+          maxThreadId++;
+        }
+
         log('run iterator');
-        iterator(next.value, itemsDone % concurrency).then(onSuccess, onError);
+        const threadId = availableThreads.shift();
+
+        iterator(next.value, threadId)
+          .then(() => {
+            availableThreads.push(threadId);
+            onSuccess();
+          }, onError);
       }
     }
 

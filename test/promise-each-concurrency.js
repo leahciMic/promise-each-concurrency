@@ -65,7 +65,7 @@ describe('promise-each-concurrency', () => {
       return Promise.resolve();
     });
 
-    return promiseEach(repeatArray([1, 0], 100), iterator, { concurrency: 2 });
+    return promiseEach(repeatArray([0, 1], 100), iterator, { concurrency: 2 });
   });
   it('should give a fake threadId', () => {
     let started = 0;
@@ -75,7 +75,7 @@ describe('promise-each-concurrency', () => {
       return Promise.resolve();
     });
 
-    return promiseEach(repeatArray([1,2, 0], 100), iterator, { concurrency: 3 });
+    return promiseEach(repeatArray([0, 1, 2], 100), iterator, { concurrency: 3 });
   });
   it('should give a fake threadId', () => {
     let started = 0;
@@ -85,6 +85,6 @@ describe('promise-each-concurrency', () => {
       return Promise.resolve();
     });
 
-    return promiseEach(repeatArray([1,2, 3, 4, 5, 0], 100), iterator, { concurrency: 6 });
+    return promiseEach(repeatArray([0, 1, 2, 3, 4, 5], 100), iterator, { concurrency: 6 });
   });
 });
