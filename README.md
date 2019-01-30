@@ -1,4 +1,4 @@
-# Promise each concurrency [![Build Status](https://travis-ci.org/leahciMic/set-query-params.svg?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
+# Promise each concurrency [![Build Status](https://travis-ci.org/leahciMic/promise-each-concurrency?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
 
 > Process an iterable of promises with concurrency
 
