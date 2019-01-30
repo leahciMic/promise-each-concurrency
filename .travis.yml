@@ -1,8 +1,5 @@
+
 language: node_js
 node_js:
+  - "lts/*"
   - "node"
-  - "5"
-  - "4"
-addons:
-    code_climate:
-        repo_token: d66196880388fef6ea061309d8e633e539df8775dd16c0d7c1edbbbb1c5a6653
