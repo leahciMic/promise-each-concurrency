@@ -1,17 +1,28 @@
-# promise-each-concurrency
-[![Build Status](https://travis-ci.org/leahciMic/promise-each-concurrency.svg?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
-[![Code Climate](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/gpa.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency)
-[![Test Coverage](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/coverage.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency/coverage)
-[![Issue Count](https://codeclimate.com/github/leahciMic/promise-each-concurrency/badges/issue_count.svg)](https://codeclimate.com/github/leahciMic/promise-each-concurrency)
-[![Dependency Status](https://www.versioneye.com/user/projects/5770e219671894003644917f/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5770e219671894003644917f)
+# Promise each concurrency [![Build Status](https://travis-ci.org/leahciMic/set-query-params.svg?branch=master)](https://travis-ci.org/leahciMic/promise-each-concurrency)
 
-Pretty much Bluebird's Promise.each with a concurrency option, and support iterators without enumerating them first.
+> Process an iterable of promises with concurrency
+
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [API](#api)
+- [Contribute](#contribute)
+- [License](#license)
+
+## Install
+
+```sh
+npm i promise-each-concurrency
+
+# Or with Yarn
+yarn add promise-each-concurrency
+```
 
 ## Usage
 
 ```js
-const promiseEach = require('promise-each-concurrency');
-// or import promiseEach from 'promise-each-concurrency';
+import promiseEach from `promise-each-concurrency`;
 
 promiseEach(
   [1, 2, 3],
@@ -51,8 +62,12 @@ promiseEach(
 |-------------|---------------|--------------------------------------------------------|
 | concurrency | Math.infinity | how many items to process at once, default is no limit |
 
+## Contributing
 
-## Changelog
+See [the contribute file](CONTRIBUTING.md)!
 
-* 1.1.0
-  - Export correctly for ES5 CommonJS exports
+PRs accepted.
+
+## License
+
+[MIT © Michael Leaney](LICENSE)
